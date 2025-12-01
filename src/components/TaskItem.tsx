@@ -1,16 +1,18 @@
 import type { Task } from '../types';
 
 type TaskItemProps = {
-    task: Task
+    task: Task,
+    onToggle: () => void
+    onDelete: () => void
 }
 
-function TaskItem({ task }: TaskItemProps) {
+function TaskItem({ task, onToggle, onDelete }: TaskItemProps) {
     return ( 
         <div>
             <input 
                 type="checkbox"
                 checked={task.completed}
-                readOnly
+                onChange={onToggle}
             />
             <span
                 style={{
@@ -20,7 +22,11 @@ function TaskItem({ task }: TaskItemProps) {
                 {task.title}
             </span>
 
-            <button>Delete</button>
+            <button
+                onClick={onDelete}
+            >
+                Delete
+            </button>
         </div>
     )
 }

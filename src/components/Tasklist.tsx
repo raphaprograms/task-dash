@@ -2,10 +2,12 @@ import type { Task } from "../types";
 import TaskItem from "./TaskItem";
 
 type TaskListProps = {
-    tasks: Task[]
+    tasks: Task[],
+    onToggleTask: (id: number) => void
+    onDeleteTask: (id: number) => void
 }
 
-function TaskList({ tasks }: TaskListProps) {
+function TaskList({ tasks, onToggleTask, onDeleteTask }: TaskListProps) {
     if (tasks.length === 0) {
         return (
             <div>
@@ -21,6 +23,8 @@ function TaskList({ tasks }: TaskListProps) {
                 <TaskItem
                     key={task.id}
                     task={task}
+                    onToggle={() => onToggleTask(task.id)}
+                    onDelete={() => onDeleteTask(task.id)}
                 />
             ))}
         </div>
